@@ -5,7 +5,10 @@ export default function Header() {
         <h1 className="text-2xl font-bold text-gray-900">Pagemanager</h1>
         <nav className="flex items-center font-bold text-gray-700">
           <a className="px-3 py-2 rounded-lg hover:bg-gray-200" href="/">
-            Features
+            Home
+          </a>
+          <a className="px-3 py-2 rounded-lg hover:bg-gray-200" href="/home">
+            Dashboard
           </a>
           <a className="px-3 py-2 rounded-lg hover:bg-gray-200" href="/signin">
             Login
