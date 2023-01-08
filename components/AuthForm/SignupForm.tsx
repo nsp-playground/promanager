@@ -3,6 +3,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Link from "next/link";
 
 interface SignUpFormValues {
   email: string;
@@ -125,6 +126,12 @@ const SignUpForm: React.FC = () => {
             >
               Sign Up
             </button>
+            <Link
+              href="/signin"
+              className="text-base font-medium text-gray-500 hover:text-gray-900"
+            >
+              Already have account?
+            </Link>
           </div>
         </Form>
       )}
