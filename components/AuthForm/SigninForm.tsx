@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import Link from "next/link";
+import { signin } from "../../lib/api/auth";
 
 interface SigninFormValues {
   email: string;
@@ -25,10 +26,12 @@ const SigninForm: React.FC = () => {
     password: Yup.string().required("Password is required"),
   });
 
-  const handleSubmit = (values: SigninFormValues) => {
+  const handleSubmit = async (values: SigninFormValues, { resetForm }: any) => {
     console.log(values);
     // perform submit action, such as making an HTTP request to a server to log in the user
-    router.replace("/home");
+    await signin(values);
+    resetForm();
+    router.push("/home");
   };
 
   return (

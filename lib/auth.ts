@@ -6,11 +6,11 @@ export const hashPassword = async (password: string) => {
   return await bcrypt.hash(password, 10);
 };
 
-export const comparePassword = (
+export const comparePassword = async (
   plainPassword: string,
   hashedPassword: string
 ) => {
-  return bcrypt.compare(plainPassword, hashedPassword);
+  return await bcrypt.compare(plainPassword, hashedPassword);
 };
 
 export const createJWT = (user: { id: string; email: string }) => {
@@ -36,7 +36,7 @@ export const validateJWT = async (jwt: string) => {
 
 export const getUserFromCookie = async (cookies: any) => {
   const jwt = cookies.get(process.env.JWT_COOKIE);
-  const { id } = await validateJWT(jwt);
+  const { id } = await validateJWT(jwt?.value);
 
   const user = await db.user.findUnique({
     where: { id },

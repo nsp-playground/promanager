@@ -19,12 +19,12 @@ const SidebarItem = ({ link = {} }) => {
   return (
     <a
       href={link.link}
-      className={`-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50 ${
+      className={`flex items-start rounded-lg p-3 hover:bg-gray-50 ${
         isActive ? "bg-green-100" : ""
       }`}
     >
       <Icon />
-      <div className="ml-4">
+      <div className="ml-4 hidden md:block">
         <p className="text-base font-medium text-gray-900">{link.name}</p>
       </div>
     </a>

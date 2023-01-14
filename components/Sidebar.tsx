@@ -26,7 +26,7 @@ const links = [
 
 const Sidebar = () => {
   return (
-    <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+    <div className="relative grid gap-2 px-2 py-2 sm:gap-2 sm:p-2">
       {links.map((link) => {
         return <SidebarItem key={link.link} link={link} />;
       })}

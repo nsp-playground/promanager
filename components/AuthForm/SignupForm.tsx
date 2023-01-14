@@ -4,6 +4,8 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
+import { signup } from "../../lib/api/auth";
+import { useRouter } from "next/navigation";
 
 interface SignUpFormValues {
   email: string;
@@ -13,6 +15,8 @@ interface SignUpFormValues {
 }
 
 const SignUpForm: React.FC = () => {
+  const router = useRouter();
+
   const initialValues: SignUpFormValues = {
     email: "",
     password: "",
@@ -29,9 +33,12 @@ const SignUpForm: React.FC = () => {
     password: Yup.string().required("Password is required"),
   });
 
-  const handleSubmit = (values: SignUpFormValues) => {
+  const handleSubmit = async (values: SignUpFormValues, { resetForm }: any) => {
     console.log(values);
     // perform submit action, such as making an HTTP request to a server to create a new account
+    await signup(values);
+    resetForm();
+    router.push("/home");
   };
 
   return (

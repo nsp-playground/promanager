@@ -23,7 +23,7 @@ export default async function signup(
 
     res.setHeader(
       "Set-Cookie",
-      serialize(process.env.JWT_COOKIE, jwt, {
+      serialize(process.env.JWT_COOKIE as any, jwt, {
         httpOnly: true,
         path: "/",
         maxAge: 60 * 60 * 24 * 7,
