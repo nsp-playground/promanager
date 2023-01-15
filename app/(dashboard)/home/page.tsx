@@ -31,8 +31,8 @@ export default async function Home() {
   const { projects = [] } = await getData();
   console.log(JSON.stringify({ projects }, null, 2));
   const allTasks = projects
-    .map((project) => project.tasks)
-    .reduce((fullList, tasks) => [...fullList, ...tasks]);
+    .map((project) => project?.tasks || [])
+    .reduce((fullList, tasks) => [...fullList, ...tasks], []);
 
   return (
     <>
@@ -45,6 +45,8 @@ export default async function Home() {
           <Suspense fallback={<GreetingsSkeleton />}>
             <Greeting />
           </Suspense>
+
+          <AddProject />
 
           <div
             style={{
@@ -61,8 +63,6 @@ export default async function Home() {
               </div>
             ))}
           </div>
-
-          <AddProject />
 
           <div>
             <TaskList tasks={allTasks} />
