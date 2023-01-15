@@ -25,18 +25,23 @@ export const createJWT = (user: { id: string; email: string }) => {
     .sign(new TextEncoder().encode(process.env.JWT_SECRET));
 };
 
-export const validateJWT = async (jwt: string) => {
-  const { payload } = await jwtVerify(
-    jwt,
-    new TextEncoder().encode(process.env.JWT_SECRET)
-  );
+export const validateJWT = async (jwt: string = "") => {
+  const { payload } =
+    (await jwtVerify(
+      jwt || "",
+      new TextEncoder().encode(process.env.JWT_SECRET)
+    )) || {};
 
-  return payload.payload as any;
+  return payload?.payload as any;
 };
 
 export const getUserFromCookie = async (cookies: any) => {
   const jwt = cookies.get(process.env.JWT_COOKIE);
-  const { id } = await validateJWT(jwt?.value);
+  const { id } = await validateJWT(jwt?.value).catch(() => {
+    return { id: null };
+  });
+
+  if (!id) return;
 
   const user = await db.user.findUnique({
     where: { id },

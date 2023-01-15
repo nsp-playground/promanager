@@ -4,13 +4,11 @@ import { Suspense } from "react";
 import Greeting from "../../../components/Greeting";
 import GreetingsSkeleton from "../../../components/GreetingSkeleton";
 import Header from "../../../components/Header";
-import NewProjectButton from "../../../components/AddProject/NewProjectButton";
 import ProjectCard from "../../../components/ProjectCard";
 import Sidebar from "../../../components/Sidebar";
 import TaskList from "../../../components/TaskList";
 import { getUserFromCookie } from "../../../lib/auth";
 import { db } from "../../../lib/db";
-import delay from "../../../lib/delay";
 import AddProject from "../../../components/AddProject/AddProject";
 
 const getData = async () => {
